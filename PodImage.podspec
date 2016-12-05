@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '10.0'
 
   s.name         = "PodImage"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "PodImage classes"
   s.description  = <<-DESC
   A bunch of classes i have found useful for PodImage
@@ -19,6 +19,8 @@ Pod::Spec.new do |s|
 
   s.source_files  = "PodImage", "PodImage/**/*.{h,m}", "PodImage/**/*.{swift}"
   s.exclude_files = "Classes/Exclude"
+
+  s.dependency 'BaseUtils'
 
 end
 
