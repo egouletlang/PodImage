@@ -21,6 +21,19 @@ open class ImageCacheEntry: LRUCacheEntry<UIImage> {
         self.lastModified = lastModified
     }
     
+    public required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        etag = aDecoder.decodeObject(forKey: "etag") as? String
+        lastModified = aDecoder.decodeObject(forKey: "lastModified") as? String
+    }
+    
+    override open func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
+        aCoder.encode(etag, forKey: "etag")
+        aCoder.encode(lastModified, forKey: "lastModified")
+    }
+    
+    
     open var etag: String?
     open var lastModified: String?
     
