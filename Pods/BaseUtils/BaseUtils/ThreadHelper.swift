@@ -1,5 +1,5 @@
 //
-//  ThreadUtils.swift
+//  ThreadHelper.swift
 //  Bankroll
 //
 //  Created by Etienne Goulet-Lang on 5/25/16.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class ThreadUtils {
+public class ThreadHelper {
     
-    public class func executeOnMainThread(block: @escaping (()->())) {
+    public class func executeOnMainThread(block: @escaping ()->Void) {
         DispatchQueue.main.async {
             block()
             return

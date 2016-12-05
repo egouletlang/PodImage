@@ -1,11 +1,11 @@
 PODS:
-  - BaseUtils (1.0.4)
+  - BaseUtils (1.0.5)
 
 DEPENDENCIES:
   - BaseUtils
 
 SPEC CHECKSUMS:
-  BaseUtils: 79989907ba0ea48e314156f4118d33040ebd9595
+  BaseUtils: b6cacc16ef465ccfd7f714535ebef32a2d7e01e3
 
 PODFILE CHECKSUM: 2e61b785cba22108eea6ec9c6445ce008853f380
 
