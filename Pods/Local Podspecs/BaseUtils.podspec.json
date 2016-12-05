@@ -3,7 +3,7 @@
   "platforms": {
     "ios": "10.0"
   },
-  "version": "1.0.4",
+  "version": "1.0.9",
   "summary": "BaseUtils classes",
   "description": "A bunch of classes i have found useful for BaseUtils",
   "license": {
@@ -15,7 +15,7 @@
   },
   "source": {
     "git": "https://github.com/egouletlang/BaseUtils.git",
-    "tag": "1.0.4"
+    "tag": "1.0.9"
   },
   "homepage": "https://github.com/egouletlang/BaseUtils",
   "source_files": [

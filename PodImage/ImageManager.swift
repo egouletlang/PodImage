@@ -14,7 +14,9 @@ open class ImageManager {
     //MARK: - Instantiation -
     /// Use the shared instance to ensure proper caching behavior
     open static let instance = ImageManager()
-    fileprivate init() {}
+    fileprivate init() {
+        NSKeyedUnarchiver.setClass(ImageCacheEntry.classForKeyedUnarchiver(), forClassName: "TestPods.ImageCacheEntry")
+    }
     
     //MARK: - Image Sources Helpers -
     fileprivate enum ImageSource: String {
@@ -44,21 +46,21 @@ open class ImageManager {
     }
     
     //MARK: - Caches -
-    private let assetCache: ImageLRUCache = {
+    private lazy var assetCache: ImageLRUCache = {
         var cache = ImageLRUCache(lruName: "asset_image_cache")
         cache.totalCostLimitMB = 50 * 1204 * 1024
         return cache
     }()
     private let assetCacheLock = Lock()
     
-    private let albumCache: ImageLRUCache = {
+    private lazy var albumCache: ImageLRUCache = {
         var cache = ImageLRUCache(lruName: "album_image_cache")
         cache.totalCostLimitMB = 50 * 1204 * 1024
         return cache
     }()
     private let albumCacheLock = Lock()
     
-    private let httpCache: ImageLRUCache = {
+    private lazy var httpCache: ImageLRUCache = {
         var cache = ImageLRUCache(lruName: "http_image_cache")
         cache.totalCostLimitMB = 200 * 1204 * 1024
         return cache

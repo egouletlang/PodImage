@@ -7,7 +7,7 @@ target 'PodImage' do
   use_frameworks!
 
   # Pods for PodImage
-#  pod 'BaseUtils', :path => '~/Code/Pods/BaseUtils/'
+  #pod 'BaseUtils', :path => '~/Code/Pods/BaseUtils/'
   pod 'BaseUtils'
 
   target 'PodImageTests' do

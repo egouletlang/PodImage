@@ -40,7 +40,7 @@ open class ImageLRUCache: LRUCache<String, UIImage> {
     }
     
     open func save() {
-        let data: Data = NSKeyedArchiver.archivedData(withRootObject: self.getCache())
+        let data: Data = NSKeyedArchiver.archivedData(withRootObject: self.getCache() as? [String: ImageCacheEntry])
         do {
             let fileURL = try FileManager.default.url(
                                     for: .documentDirectory,

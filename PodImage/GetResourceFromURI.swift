@@ -148,6 +148,7 @@ class GetResourceFromURI: UniqueOperation {
                 case 200:
                     completion(data, res.allHeaderFields["Etag"] as? String, res.allHeaderFields["Last-Modified"] as? String)
                     
+                    
                 // if the response from the server is 304, the resource has not been updated.
                 case 304:
                     completion(nil, nil, nil)
