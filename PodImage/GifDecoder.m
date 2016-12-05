@@ -22,7 +22,7 @@ NSString * const kGifDecoderErrorDomain = @"GifDecoderError";
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
     
     int count;
-    if (!CGImageSourceGetStatus(source) == kCGImageStatusComplete) {
+    if (CGImageSourceGetStatus(source) != kCGImageStatusComplete) {
         count = 0;
     } else {
         count = (int)CGImageSourceGetCount(source);
@@ -36,7 +36,7 @@ NSString * const kGifDecoderErrorDomain = @"GifDecoderError";
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
     
     UIImage* result;
-    if (!CGImageSourceGetStatus(source) == kCGImageStatusComplete) {
+    if (CGImageSourceGetStatus(source) != kCGImageStatusComplete) {
         result = nil;
     } else {
         CGImageRef image = CGImageSourceCreateImageAtIndex(source, 0, NULL);
@@ -56,7 +56,7 @@ NSString * const kGifDecoderErrorDomain = @"GifDecoderError";
     unsigned char *bytes = (unsigned char*)data.bytes;
     NSError* error = nil;
     
-    if (!CGImageSourceGetStatus(source) == kCGImageStatusComplete) {
+    if (CGImageSourceGetStatus(source) != kCGImageStatusComplete) {
         error = [NSError errorWithDomain: kGifDecoderErrorDomain
                                     code: kGifDecoderErrorInvalidGIFImage
                                 userInfo: nil];

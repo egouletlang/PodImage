@@ -135,8 +135,12 @@ class GetResourceFromURI: UniqueOperation {
         // NSURLCache can be used.
         
         // NOTE: NSURLSession does not seem to work in the extension... this call will continue to be use
-        // NSURLConnection.
-        NSURLConnection.sendAsynchronousRequest(request, queue: GetResourceFromURI.networkQueue) { (response: URLResponse?, data: Data?, error: Error?) -> Void in
+        
+        let session = URLSession(configuration: URLSessionConfiguration.default,
+                                 delegate: nil,
+                                 delegateQueue: GetResourceFromURI.networkQueue)
+        
+        let task = session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             if let res = response as? HTTPURLResponse {
                 switch (res.statusCode) {
                     
@@ -155,6 +159,7 @@ class GetResourceFromURI: UniqueOperation {
                 completion(nil, nil, nil)
             }
         }
+        task.resume()
     }
     
 }
