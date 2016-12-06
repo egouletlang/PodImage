@@ -19,6 +19,10 @@ open class ImageLRUCache: LRUCache<String, UIImage> {
     
     open var lruName: String!
     
+    open func get(entryForKey key: String) -> ImageCacheEntry? {
+        return self.get(objForKey: key) as? ImageCacheEntry
+    }
+    
     open func get(imageForKey key: String) -> UIImage? {
         return self.get(objForKey: key)?.value
     }

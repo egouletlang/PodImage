@@ -34,15 +34,19 @@ class GetResourceFromURI: UniqueOperation {
     // This can be time consuming, and eat up cpu. The stillImage flag provides a way
     // to bypass this process when it is unnecessary
     // checkForUpdateOnly causes this operation to only create UIImage objs if the object has changed on the server.
-    convenience init(uri: String, checkForUpdateOnly: Bool) {
+    convenience init(uri: String, checkForUpdateOnly: Bool, etag: String?, lastModified: String?) {
         self.init()
         self.uri = uri
         self.checkForUpdateOnly = checkForUpdateOnly
+        self.etag = etag
+        self.lastModified = lastModified
     }
     
     // MARK: - Convenience Variables -
     private var uri: String?
     private var checkForUpdateOnly = false
+    private var etag: String?
+    private var lastModified: String?
     
     private static let networkQueue: OperationQueue = {
         var queue = OperationQueue()
@@ -60,7 +64,7 @@ class GetResourceFromURI: UniqueOperation {
         getResource(uri: u)
     }
     
-    private func complete(result: UIImage?) {
+    private func complete(result: ImageResponse?) {
         self.deactivate(result: result)
     }
     
@@ -99,13 +103,10 @@ class GetResourceFromURI: UniqueOperation {
                 return
             }
             
-            let image = GifDecoder.getCoverImage(d)
-            if image != nil {
-                ImageManager.instance.getHttpCache() { (cache: ImageLRUCache) in
-                    cache.put(key: uri, image: image!, etag: etag, lastModified: lastModified)
-                }
-            }
-            self.complete(result: image)
+            let imageResponse = ImageResponse.web(key: uri, image: GifDecoder.getCoverImage(d))
+            imageResponse.etag = etag
+            imageResponse.lastModified = lastModified
+            self.complete(result: imageResponse)
         }
         
     }
@@ -118,14 +119,11 @@ class GetResourceFromURI: UniqueOperation {
         // TODO: Handle cache-control header - might be a good place to start: http://www.mobify.com/blog/beginners-guide-to-http-cache-headers/
         // Check the cache for etag & lastModified. Only set the headers if checkForUpdateOnly is set.
         if self.checkForUpdateOnly {
-            
-            ImageManager.instance.getHttpCache() { (cache: ImageLRUCache) in
-                if let etag = cache.get(etagForKey: url.absoluteString) {
-                    request.addValue(etag, forHTTPHeaderField: "If-None-Match")
-                }
-                if let lastModified = cache.get(lastModifiedForKey: url.absoluteString) {
-                    request.addValue(lastModified, forHTTPHeaderField: "If-Modified-Since")
-                }
+            if let etag = self.etag {
+                request.addValue(etag, forHTTPHeaderField: "If-None-Match")
+            }
+            if let lastModified = self.lastModified {
+                request.addValue(lastModified, forHTTPHeaderField: "If-Modified-Since")
             }
         }
         

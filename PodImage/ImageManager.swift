@@ -36,6 +36,15 @@ open class ImageManager {
         static func isWeb(str: String) -> Bool {
             return str.startsWith(Http.rawValue) || str.startsWith(Https.rawValue)
         }
+        
+        static func removeImageSource(str: String) -> String {
+            if let range = str.range(of: Asset.rawValue) {
+                return str.replacingCharacters(in: range , with: "")
+            } else if let range = str.range(of: Album.rawValue) {
+                return str.replacingCharacters(in: range , with: "")
+            }
+            return str
+        }
     }
     
     open class func buildAssetUri(name: String) -> String {
@@ -68,7 +77,7 @@ open class ImageManager {
     private let httpCacheLock = Lock()
     
     //MARK: - Operation Queue -
-    private let uriQueue = UniqueOperationQueue<UIImage>(name: "image.queue.uri", concurrentCount: 5)
+    private let uriQueue = UniqueOperationQueue<ImageResponse>(name: "image.queue.uri", concurrentCount: 5)
     
     fileprivate func getCache(source: ImageSource) -> ImageLRUCache {
         switch (source) {
@@ -124,19 +133,31 @@ open class ImageManager {
     
     //MARK: - Get Images -
     
-    fileprivate func getFromCache(key: String) -> UIImage? {
-        var image: UIImage?
-        self.getCache(key: key) { image = $0.get(imageForKey: key) }
-        return image
+//    fileprivate func getFromCache(key: String) -> UIImage? {
+//        var image: UIImage?
+//        self.getCache(key: key) { image = $0.get(imageForKey: key) }
+//        return image
+//    }
+    
+    fileprivate func getFromCache(key: String) -> ImageResponse? {
+        var ir: ImageResponse?
+        self.getCache(key: key) { ir = ImageResponse.build(key: key, imageCacheEntry: $0.get(entryForKey: key)) }
+        return ir
     }
     
     fileprivate func fetch(key: String,
-                           isCached: Bool,
-                           callback: @escaping (UIImage?) -> Void) {
+                           cachedResponse: ImageResponse?,
+                           callback: @escaping (ImageResponse?) -> Void) {
         
         if ImageSource.isWeb(str: key) {
-            let op = GetResourceFromURI(uri: key, checkForUpdateOnly: isCached)
+            let op = GetResourceFromURI(uri: key,
+                                        checkForUpdateOnly: (cachedResponse != nil),
+                                        etag: cachedResponse?.etag,
+                                        lastModified: cachedResponse?.lastModified)
             uriQueue.addOperation(op: op, callback: callback)
+        } else if ImageSource.isAsset(str: key) && cachedResponse == nil,
+            let image = UIImage(named: ImageSource.removeImageSource(str: key)) {
+            callback(ImageResponse.disk(key: key, image: image))
         }
         
     }
@@ -156,33 +177,30 @@ open class ImageManager {
             }
             
             // Create the transformed key
-            var transformedKey = originalKey
-            for transform in request.transforms ?? [] {
-                transformedKey = transform.modifyKey(key: transformedKey)
-            }
+            let transformedKey = request.buildTransformedKey()!
             
             // Challenge the Cache with the transformed key, respond using the original image
-            let cachedImage = self.getFromCache(key: transformedKey)
+            let cachedImageResponse = self.getFromCache(key: transformedKey)
             
             // Respond with the cached image if it exists, using the original key
-            if cachedImage != nil {
+            if let cachedImage = cachedImageResponse?.image {
                 callback(ImageResponse.cached(key: originalKey, image: cachedImage))
             }
             
             // Fetch the new image to see if it has changed,
             // img: UIImage? will be nil if nothing has changed.
-            self.fetch(key: originalKey, isCached: (cachedImage != nil)) { (image: UIImage?) in
-                guard let img = image else { return }
+            self.fetch(key: originalKey, cachedResponse: cachedImageResponse) { (imageResponse: ImageResponse?) in
+                guard let ir = imageResponse, let img = ir.image else { return }
                 
-                var transformedImage: UIImage? = img
-                for transform in request.transforms ?? [] {
-                    transformedImage = transform.transform(img: transformedImage)
+                self.getCache(key: originalKey) { $0.put(key: originalKey, image: img, etag: ir.etag, lastModified: ir.lastModified) }
+                
+                let transformedImage = request.buildTransformedImage(image: img)
+                
+                if request.transforms != nil, transformedImage != nil {
+                    self.getCache(key: transformedKey) { $0.put(key: transformedKey, image: transformedImage!, etag: ir.etag, lastModified: ir.lastModified) }
                 }
                 
-                if let transformedImg = transformedImage {
-                    self.getCache(key: transformedKey) { $0.put(key: transformedKey, image: transformedImg) }
-                    callback(ImageResponse.web(key: originalKey, image: transformedImg))
-                }
+                callback(ImageResponse.web(key: originalKey, image: transformedImage))
             }
         }
     }

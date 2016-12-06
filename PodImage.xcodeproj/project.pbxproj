@@ -12,6 +12,8 @@
 		6B2037701DF505DA009C1797 /* GifDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B20376E1DF505DA009C1797 /* GifDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6B2037711DF505DA009C1797 /* GifDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B20376F1DF505DA009C1797 /* GifDecoder.m */; };
 		6B2037731DF5072A009C1797 /* ImageCacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2037721DF5072A009C1797 /* ImageCacheEntry.swift */; };
+		6B60960A1DF5FCDD00423BCF /* CircleImageTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6096091DF5FCDD00423BCF /* CircleImageTransform.swift */; };
+		6B60960C1DF5FD3900423BCF /* ImageTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B60960B1DF5FD3900423BCF /* ImageTransformer.swift */; };
 		6BCB294D1DF3408400AC3A7E /* PodImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BCB29431DF3408400AC3A7E /* PodImage.framework */; };
 		6BCB29521DF3408400AC3A7E /* PodImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB29511DF3408400AC3A7E /* PodImageTests.swift */; };
 		6BCB29541DF3408400AC3A7E /* PodImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BCB29461DF3408400AC3A7E /* PodImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,6 +40,8 @@
 		6B20376E1DF505DA009C1797 /* GifDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GifDecoder.h; sourceTree = "<group>"; };
 		6B20376F1DF505DA009C1797 /* GifDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifDecoder.m; sourceTree = "<group>"; };
 		6B2037721DF5072A009C1797 /* ImageCacheEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCacheEntry.swift; sourceTree = "<group>"; };
+		6B6096091DF5FCDD00423BCF /* CircleImageTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageTransform.swift; sourceTree = "<group>"; };
+		6B60960B1DF5FD3900423BCF /* ImageTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTransformer.swift; sourceTree = "<group>"; };
 		6BCB29431DF3408400AC3A7E /* PodImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PodImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BCB29461DF3408400AC3A7E /* PodImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PodImage.h; sourceTree = "<group>"; };
 		6BCB29471DF3408400AC3A7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 				6BCB29611DF3433400AC3A7E /* ImageManager.swift */,
 				6BCB297E1DF4F39200AC3A7E /* ImageLRUCache.swift */,
 				6B2037721DF5072A009C1797 /* ImageCacheEntry.swift */,
+				6B60960B1DF5FD3900423BCF /* ImageTransformer.swift */,
 			);
 			path = PodImage;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				6BCB29631DF343D300AC3A7E /* BaseImageTransform.swift */,
+				6B6096091DF5FCDD00423BCF /* CircleImageTransform.swift */,
 			);
 			name = Transforms;
 			sourceTree = "<group>";
@@ -375,10 +381,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BCB29681DF3DD1600AC3A7E /* ImageResponse.swift in Sources */,
+				6B60960C1DF5FD3900423BCF /* ImageTransformer.swift in Sources */,
 				6B2037731DF5072A009C1797 /* ImageCacheEntry.swift in Sources */,
 				6BCB29621DF3433400AC3A7E /* ImageManager.swift in Sources */,
 				6B2037711DF505DA009C1797 /* GifDecoder.m in Sources */,
 				6BCB297F1DF4F39200AC3A7E /* ImageLRUCache.swift in Sources */,
+				6B60960A1DF5FCDD00423BCF /* CircleImageTransform.swift in Sources */,
 				6BCB29661DF3451600AC3A7E /* ImageRequest.swift in Sources */,
 				6BCB29641DF343D300AC3A7E /* BaseImageTransform.swift in Sources */,
 				6BCB29891DF5037000AC3A7E /* GetResourceFromURI.swift in Sources */,
@@ -422,6 +430,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -475,6 +484,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
