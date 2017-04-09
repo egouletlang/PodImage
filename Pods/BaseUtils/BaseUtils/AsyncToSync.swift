@@ -10,7 +10,7 @@ import Foundation
 
 open class AsyncToSync<T> {
     
-    private let SLEEP_TIME: TimeInterval = 1
+    private let SLEEP_TIME: TimeInterval = 0.1
     
     public init(timeout: TimeInterval = 5) {
         self.timeout = timeout
