@@ -70,7 +70,7 @@ public class BaseImageTransformer {
         let radius: CGFloat = size * radiusPrecentage / 2
         
         context?.beginPath()
-        context?.addArc(center: CGPoint(x: size / 2, y: size / 2), radius: radius, startAngle: 0, endAngle: CGFloat(2 * M_PI), clockwise: true)
+        context?.addArc(center: CGPoint(x: size / 2, y: size / 2), radius: radius, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
         context?.closePath()
         context?.clip()
         
@@ -160,11 +160,11 @@ public class BaseImageTransformer {
         }
         
         if (orientation == UIImageOrientation.right) {
-            return rotateImage(image: image, radians: CGFloat(0.5 * M_PI))
+            return rotateImage(image: image, radians: CGFloat(0.5 * Double.pi))
         } else if (orientation == UIImageOrientation.left) {
-            return rotateImage(image: image, radians: -CGFloat(0.5 * M_PI))
+            return rotateImage(image: image, radians: -CGFloat(0.5 * Double.pi))
         } else if (orientation == UIImageOrientation.down) {
-            return rotateImage(image: image, radians: CGFloat(M_PI))
+            return rotateImage(image: image, radians: CGFloat(Double.pi))
         }
         
         return image

@@ -32,10 +32,13 @@ public extension CGColor {
     }
     
     public func toRGBString(_ prefixWithHash: Bool = true) -> String {
-        let components = self.components
-        var r = NSString(format: "%X", UInt((components?[0])! * 255))
-        var g = NSString(format: "%X", UInt((components?[1])! * 255))
-        var b = NSString(format: "%X", UInt((components?[2])! * 255))
+        guard let components = self.components, components.count >= 3  else {
+            return ""
+        }
+        
+        var r = NSString(format: "%X", UInt((components[0]) * 255))
+        var g = NSString(format: "%X", UInt((components[1]) * 255))
+        var b = NSString(format: "%X", UInt((components[2]) * 255))
         
         if r.length == 1 {r = NSString(string: "0" + (r as String)) }
         if g.length == 1 {g = NSString(string: "0" + (g as String)) }

@@ -41,6 +41,20 @@ public class PresentationHelper {
         return ret
     }
     
+    open class func collectText(title: String, subTitle: String? = nil, viewController: UIViewController, callback: @escaping (String)->Void) {
+        let alert = UIAlertController(title: title, message: subTitle, preferredStyle: .alert)
+        
+        alert.addTextField(configurationHandler: nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default) { (action: UIAlertAction) in
+            if let q = alert.textFields?.first?.text {
+                callback(q)
+            }
+        })
+        
+        viewController.present(alert, animated: true, completion: nil)
+    }
+    
     
     // MARK: - Alert -
     public class func displayAlert<T>(

@@ -14,6 +14,7 @@
 		6B2037731DF5072A009C1797 /* ImageCacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2037721DF5072A009C1797 /* ImageCacheEntry.swift */; };
 		6B60960A1DF5FCDD00423BCF /* CircleImageTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6096091DF5FCDD00423BCF /* CircleImageTransform.swift */; };
 		6B60960C1DF5FD3900423BCF /* ImageTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B60960B1DF5FD3900423BCF /* ImageTransformer.swift */; };
+		6B9B2F261E99FAA00059A379 /* ColorImageTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B2F251E99FAA00059A379 /* ColorImageTransform.swift */; };
 		6BCB294D1DF3408400AC3A7E /* PodImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BCB29431DF3408400AC3A7E /* PodImage.framework */; };
 		6BCB29521DF3408400AC3A7E /* PodImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB29511DF3408400AC3A7E /* PodImageTests.swift */; };
 		6BCB29541DF3408400AC3A7E /* PodImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BCB29461DF3408400AC3A7E /* PodImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -42,6 +43,7 @@
 		6B2037721DF5072A009C1797 /* ImageCacheEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCacheEntry.swift; sourceTree = "<group>"; };
 		6B6096091DF5FCDD00423BCF /* CircleImageTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageTransform.swift; sourceTree = "<group>"; };
 		6B60960B1DF5FD3900423BCF /* ImageTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTransformer.swift; sourceTree = "<group>"; };
+		6B9B2F251E99FAA00059A379 /* ColorImageTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorImageTransform.swift; sourceTree = "<group>"; };
 		6BCB29431DF3408400AC3A7E /* PodImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PodImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BCB29461DF3408400AC3A7E /* PodImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PodImage.h; sourceTree = "<group>"; };
 		6BCB29471DF3408400AC3A7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				6BCB29631DF343D300AC3A7E /* BaseImageTransform.swift */,
 				6B6096091DF5FCDD00423BCF /* CircleImageTransform.swift */,
+				6B9B2F251E99FAA00059A379 /* ColorImageTransform.swift */,
 			);
 			name = Transforms;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				6B60960A1DF5FCDD00423BCF /* CircleImageTransform.swift in Sources */,
 				6BCB29661DF3451600AC3A7E /* ImageRequest.swift in Sources */,
 				6BCB29641DF343D300AC3A7E /* BaseImageTransform.swift in Sources */,
+				6B9B2F261E99FAA00059A379 /* ColorImageTransform.swift in Sources */,
 				6BCB29891DF5037000AC3A7E /* GetResourceFromURI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

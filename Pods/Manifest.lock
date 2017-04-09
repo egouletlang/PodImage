@@ -1,16 +1,12 @@
 PODS:
-  - BaseUtils (1.0.9)
+  - BaseUtils (1.0.32)
 
 DEPENDENCIES:
-  - BaseUtils (from `~/Code/Pods/BaseUtils/`)
-
-EXTERNAL SOURCES:
-  BaseUtils:
-    :path: ~/Code/Pods/BaseUtils/
+  - BaseUtils
 
 SPEC CHECKSUMS:
-  BaseUtils: 38e7345d2387ce8ed6ef60ef8e595cf60fb67481
+  BaseUtils: edec4a41648eee178fcf5dfe1d882a953a6a208c
 
-PODFILE CHECKSUM: 8b79181638f94817a6626e7a86bd325575ecb193
+PODFILE CHECKSUM: 07ebbbd29686b64e2b7f7c896e9089982f134abf
 
 COCOAPODS: 1.1.1

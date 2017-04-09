@@ -13,7 +13,7 @@ open class LRUCache<T: Comparable & Hashable, K> {
     public init() {}
     
     private let recentKeys = LinkedList<T>()
-    private var cache = [T: AnyObject]()
+    private var cache = [T: LRUCacheEntry<K>]()
     private var currentCost: Int = 0
     
     open var totalCostLimitMB = 100 * 1204 * 1024 {
@@ -26,14 +26,14 @@ open class LRUCache<T: Comparable & Hashable, K> {
         var key: T!
         while (currentCost > totalCostLimitMB) {
             key = recentKeys.pop()
-            currentCost -= (cache.get(key) as? LRUCacheEntry<K>)?.cost ?? 0
+            currentCost -= cache.get(key)?.cost ?? 0
             cache.removeValue(forKey: key)
         }
     }
     
     open func get(objForKey key: T) -> LRUCacheEntry<K>? {
         recentKeys.addOrMove(value: key)
-        return cache.get(key) as? LRUCacheEntry<K>
+        return cache.get(key)
     }
     
     open func put(key: T, obj: LRUCacheEntry<K>) {
@@ -46,7 +46,7 @@ open class LRUCache<T: Comparable & Hashable, K> {
     }
     
     open func getCache() -> [T: LRUCacheEntry<K>] {
-        return cache as! [T: LRUCacheEntry<K>]
+        return cache
     }
     
     open func setCache(cache: [T: LRUCacheEntry<K>]?) {
@@ -54,7 +54,7 @@ open class LRUCache<T: Comparable & Hashable, K> {
             self.cache = c
             for (key, value) in self.cache {
                 recentKeys.addOrMove(value: key)
-                currentCost += (value as? LRUCacheEntry<K>)?.cost ?? 0
+                currentCost += value.cost
             }
         }
     }

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AttributeStringCreator.h"
 
 //! Project version number for BaseUtils.
 FOUNDATION_EXPORT double BaseUtilsVersionNumber;
