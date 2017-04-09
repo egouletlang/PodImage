@@ -22,8 +22,8 @@ public class ColorImageTransform: BaseImageTransform {
     }
     
     override open func transform(img: UIImage?) -> UIImage? {
-        if let c = self.color {
-            return BaseImageTransformer.imageWithColorMask(imageRef: img, color: UIColor(hexString: c))
+        if let c = self.color, let clr = UIColor(hexString: c) {
+            return BaseImageTransformer.imageWithColorMask(imageRef: img, color: clr)
         }
         return img
     }
