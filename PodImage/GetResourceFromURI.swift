@@ -23,6 +23,8 @@ import BaseUtils
 /// - Non-animated Resources create a UIImage object
 class GetResourceFromURI: UniqueOperation {
     
+    private var retry = 0;
+    
     // MARK: - Unique id -
     // required for UniqueOperationQueue
     override func getUniqueId() -> String? {
@@ -140,6 +142,7 @@ class GetResourceFromURI: UniqueOperation {
         
         let task = session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             if let res = response as? HTTPURLResponse {
+                print(res.statusCode)
                 switch (res.statusCode) {
                     
                 // if the response from the server is 200, the resource has been fetched successfully
@@ -150,9 +153,15 @@ class GetResourceFromURI: UniqueOperation {
                 // if the response from the server is 304, the resource has not been updated.
                 case 304:
                     completion(nil, nil, nil)
-                    
+                
                 default:
-                    completion(nil, nil, nil)
+                    if (!self.checkForUpdateOnly && (res.statusCode / 100 == 4) && (self.retry < 3)) {
+                        Thread.sleep(forTimeInterval: 1)
+                        self.retry += 1
+                        self.makeRequest(url: url, completion: completion)
+                    } else {
+                        completion(nil, nil, nil)
+                    }
                 }
             } else {
                 completion(nil, nil, nil)
