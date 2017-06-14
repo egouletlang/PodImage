@@ -5,11 +5,13 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "BF3B5ED4755471DF69721C95E12BC273B2DF1951" : 9223372036854775807,
+    "9C2F9A5724F1E8CA33FD77C18AC21844AD67E3E3" : 9223372036854775807,
     "70CDE46A0D8FF284690C6591AF630EE0BFDC896E" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E1211C15-2100-46C0-A139-3AEFFCE54601",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "BF3B5ED4755471DF69721C95E12BC273B2DF1951" : "BaseUtils\/",
+    "9C2F9A5724F1E8CA33FD77C18AC21844AD67E3E3" : "..",
     "70CDE46A0D8FF284690C6591AF630EE0BFDC896E" : "PodImage\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "PodImage",
@@ -20,6 +22,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/egouletlang\/PodImage.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "70CDE46A0D8FF284690C6591AF630EE0BFDC896E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/doradoex.visualstudio.com\/dorado\/_git\/client",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9C2F9A5724F1E8CA33FD77C18AC21844AD67E3E3"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/egouletlang\/BaseUtils.git",
